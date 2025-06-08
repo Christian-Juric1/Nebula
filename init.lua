@@ -1,9 +1,34 @@
 -- init.lua
 
--- core files
-require("core.options")
-require("core.keymaps")
-require("core.autocmds")
-require("core.plugins")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
+	end
+	vim.opt.rtp:prepend(lazypath)
 
--- plugins
+	require("core")
+
+	require("lazy").setup("plugins", {
+		defaults = {
+			lazy = false,
+			version = false,
+		},
+		install = {
+			colorscheme = { "tokyonight" },
+		},
+		checker = {
+			enabled = true,
+			notify = false,
+		},
+		change_detection = {
+			notify = false,
+		},
+	})
+

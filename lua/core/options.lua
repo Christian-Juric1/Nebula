@@ -1,80 +1,73 @@
 -- lua/core/options.lua
 
-local o = vim.opt
 
--- ======= General Settings =======
+local opt = vim.opt
 
-o.number = true
-o.relativenumber = true
-o.cursorline = false
-o.signcolumn = "yes"
-o.wrap = true
-o.ruler = true
--- o.colorcolumn = "80,100"
--- o.laststatus = 1
-o.linebreak = false
-o.showmode = true
-o.list = true
--- o.listchars = true
-o.fileencoding = "utf-8"
-o.encoding = "utf-8"
-o.lazyredraw = true
-o.wildmenu = true
--- o.wildmode = string or table
-o.modifiable = true
-o.hidden = false
-o.showmatch = true
--- o.matchpairs = string or table
+-- General
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
+opt.swapfile = false
+opt.completeopt = "menuone,noinsert,noselect"
 
--- ======= Tab & Indent =======
+-- UI
+opt.number = true
+opt.relativenumber = true
+opt.showmatch = true
+opt.foldmethod = "marker"
+opt.splitright = true
+opt.splitbelow = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.linebreak = false
+opt.wrap = true
+opt.termguicolors = true
+opt.laststatus = 2
+opt.cmdheight = 1
+opt.updatetime = 250
+opt.timeoutlen = 300
+opt.conceallevel = 0
+opt.pumheight = 10
+opt.showtabline = 2
+opt.signcolumn = "yes"
 
-o.softtabstop = 4
-o.expandtab = true
-o.shiftwidth = 4
-o.tabstop = 4
-o.smarttab = true
-o.smartindent = true
-o.autoindent = true
+-- Tabs
+opt.tabstop = 2
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.expandtab = true
+opt.smartindent = true
 
--- ======= Search =======
+-- Memory, CPU
+opt.hidden = true
+opt.history = 100
+opt.lazyredraw = true
+opt.synmaxcol = 240
 
-o.ignorecase = true
-o.smartcase = true
-o.incsearch = true
-o.hlsearch = false
+-- Colorscheme
+opt.background = "dark"
 
--- ======= View & UI =======
+-- Disable builtin plugins
+local disabled_built_ins = {
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit"
+}
 
-o.termguicolors = true
-o.background = "dark"
-o.clipboard = "unnamedplus"
-o.cmdheight = 1
-o.updatetime = 300
-o.timeoutlen = 500
-
--- ======= Backup, Swap and Undo =======
-
-o.backup = false
-o.writebackup = false
-o.swapfile = false
-o.undofile = true
--- o.undodir = "~/.config/nvim/undo"
-o.autoread = true
-
--- ======= Mouse & Scroll =======
-
-o.mouse = "a"
--- o.guicursor = ""
-o.scrolljump = 5
-o.scrolloff = 8
-o.sidescrolloff = 8
-
--- ======= Window =======
-
-o.splitright = true
-o.splitbelow = true
-
--- ======= Miscellaneous =======
-
-o.completeopt = { "menu", "menuone", "noselect"}
-o.shortmess:append("c")
+for _, plugin in pairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end

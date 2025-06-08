@@ -1,34 +1,53 @@
 -- lua/core/keymaps.lua
 
-local map = vim.keymap.set
+local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Leader key
-
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
+-- General keymaps
+keymap("n", "<C-h>", "<C-w>h", opts) -- Navigate windows
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
 
--- ======= Windownavigation =======
+keymap("n", "<leader>w", ":w<CR>", opts) -- Save
+keymap("n", "<leader>q", ":q<CR>", opts) -- Quit
+keymap("n", "<leader>h", ":nohlsearch<CR>", opts) -- Clear search highlights
 
-map("n", "<C-h>", "<C-w>h", opts)
-map("n", "<C-j>", "<C-w>j", opts)
-map("n", "<C-k>", "<C-w>k", opts)
-map("n", "<C-l>", "<C-w>l", opts)
+-- Resize windows
+keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- ======= Tabnavigation =======
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<leader>bd", ":bdelete<CR>", opts)
 
-map("n", "<S-l>", ":bnext<CR>", opts)
-map("n", "<S-h>", ":bprevious<CR>", opts)
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "p", '"_dP', opts)
 
--- ======= Saving File =======
+-- Stay in indent mode
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
 
-map("n", "<leader>w", ":w<CR>", opts)
-map("n", "<leader>q", ":q<CR>", opts)
+-- NvimTree
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
--- ======= Deleting without clipboard =======
+-- Telescope
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", opts)
+keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>", opts)
 
-map("n", "x", '"_x', opts)
+-- Git
+keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
--- ======= select all =======
-
-map("n", "<C-a>", "gg<S-v>G", opts)
+-- LSP keymaps (will be set in lsp/lspconfig.lua)
