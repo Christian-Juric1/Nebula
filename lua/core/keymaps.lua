@@ -51,3 +51,37 @@ keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<CR>", opts)
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- LSP keymaps (will be set in lsp/lspconfig.lua)
+
+-- Terminal
+keymap("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", opts)
+keymap("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", opts)
+keymap("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<cr>", opts)
+
+-- Buffer navigation
+keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", opts)
+keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", opts)
+keymap("n", "<leader>bd", "<cmd>BufferLinePickClose<cr>", opts)
+
+-- Project
+keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", opts)
+
+-- Session
+keymap("n", "<leader>ss", "<cmd>lua require('persistence').load()<cr>", opts)
+keymap("n", "<leader>sl", "<cmd>lua require('persistence').load({ last = true })<cr>", opts)
+keymap("n", "<leader>sq", "<cmd>lua require('persistence').stop()<cr>", opts)
+
+-- Todo comments
+keymap("n", "]t", function()
+  require("todo-comments").jump_next()
+end, opts)
+keymap("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, opts)
+
+-- Package info
+keymap("n", "<leader>ns", "<cmd>lua require('package-info').show()<cr>", opts)
+keymap("n", "<leader>nc", "<cmd>lua require('package-info').hide()<cr>", opts)
+keymap("n", "<leader>nt", "<cmd>lua require('package-info').toggle()<cr>", opts)
+keymap("n", "<leader>nu", "<cmd>lua require('package-info').update()<cr>", opts)
+keymap("n", "<leader>nd", "<cmd>lua require('package-info').delete()<cr>", opts)
+keymap("n", "<leader>ni", "<cmd>lua require('package-info').install()<cr>", opts)
